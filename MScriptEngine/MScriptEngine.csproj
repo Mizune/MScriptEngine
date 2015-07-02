@@ -90,8 +90,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Images\BGI\" />
-    <Folder Include="Assets\Images\Characters\" />
     <Folder Include="Assets\Images\Thumbnails\" />
     <Folder Include="Assets\Sounds\" />
     <Folder Include="Models\" />
@@ -102,6 +100,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\BGI\backgroundDefault.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\Characters\thumbnails.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
