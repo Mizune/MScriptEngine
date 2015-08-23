@@ -1,118 +1,42 @@
 ﻿<Window x:Class="MScriptEngine.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525" SnapsToDevicePixels="True"
-        Background="Black">
-    <Window.Resources>
-        <Style x:Key="CaptionButtonStyleKey" TargetType="{x:Type Button}">
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="Marlett"/>
-            <Setter Property="IsTabStop" Value="False"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Margin" Value="2" />
-            <Setter Property="Padding" Value="1" />
-            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="Transparent" SnapsToDevicePixels="True">
-                            <Border.Effect>
-                                <DropShadowEffect Opacity="0"/>
-                            </Border.Effect>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.6"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="border">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Color)" Storyboard.TargetName="border">
-                                                <EasingColorKeyFrame KeyTime="0" Value="White"/>
-                                            </ColorAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" Storyboard.TargetName="border">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.6"/>
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" Margin="{TemplateBinding Padding}"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        </Style>
-    </Window.Resources>
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="{x:Static SystemParameters.CaptionHeight}"
-                      ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}"
-                      UseAeroCaptionButtons="False"/>
-    </WindowChrome.WindowChrome>
-    <Border BorderBrush="Gray"
-            BorderThickness="1">
-        <Grid>
-            <Image Grid.Row="0"
+        Title="MainWindow" Height="720" Width="1280" SnapsToDevicePixels="True"
+        Background="Black"
+        ResizeMode="NoResize">
+    <Grid>
+        <Image Grid.Row="0"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch"
                        x:Name="BackgroundImage" Margin="0,20,0,0" Source="/Assets/Images/BGI/backgroundDefault.jpg"></Image>
-            <StackPanel Orientation="Horizontal" Margin="5"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top">
-                <Button Content="0" Style="{DynamicResource CaptionButtonStyleKey}" />
-                <Button Content="1" Style="{DynamicResource CaptionButtonStyleKey}" />
-                <Button Content="2" Style="{DynamicResource CaptionButtonStyleKey}" />
-                <Button Content="r" Style="{DynamicResource CaptionButtonStyleKey}" />
-            </StackPanel>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="7*"/>
-                    <RowDefinition Height="4*"/>
-                </Grid.RowDefinitions>
-                <Grid Margin="30,26,30,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Name="CharLeftImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="0"></Image>
-                    <Image x:Name="CharCenterImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="1"></Image>
-                    <Image x:Name="CharRightImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="2"></Image>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="9*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="0"/>
-                    <Grid Grid.Column="1">
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="30" TextAlignment="Center" FontSize="22">CharName</TextBlock>
-                        <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,30,15,15" FontSize="15" TextWrapping="Wrap">ほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文</TextBlock>
-                    </Grid>
+        <Grid MouseLeftButtonDown="Bg_ButtonClick">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="30,26,30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="CharLeftImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="0"></Image>
+                <Image x:Name="CharCenterImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="1"></Image>
+                <Image x:Name="CharRightImg" Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="2"></Image>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="9*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/Images/Characters/thumbnails.jpg" Grid.Column="0"/>
+                <Grid Grid.Column="1">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50" TextAlignment="Center" FontSize="40">CharName</TextBlock>
+                    <TextBlock x:Name="MainText" MouseLeftButtonDown="MainTextClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,50,15,15" FontSize="30" TextWrapping="Wrap">ほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文</TextBlock>
                 </Grid>
             </Grid>
         </Grid>
-    </Border>
+        <MediaElement Name="BGM" 
+                      Source="/Sounds/Somesong.mp3"></MediaElement>
+    </Grid>
 </Window>
