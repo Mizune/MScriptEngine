@@ -97,7 +97,6 @@
   <ItemGroup>
     <Folder Include="Assets\Images\Thumbnails\" />
     <Folder Include="Assets\Sounds\" />
-    <Folder Include="Scinarios\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\Characters\thumbnails.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Scinarios\FirstScinario.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
