@@ -1,5 +1,6 @@
 ﻿using MScriptEngine.Views;
 using System.Collections;
+using MScriptEngine.Models;
 
 namespace MScriptEngine.Models
 {
@@ -10,6 +11,44 @@ namespace MScriptEngine.Models
         {
             this.Context = BaseContext;
         }
+
+
+        public void Brancher(int param,string[] data)
+        {
+            switch (param)
+            {
+                case ConstParams.Text:
+                    SetMainText(data[1]);
+                    break;
+                case ConstParams.Switch:
+                    CreateSwitch(int.Parse(data[1]),data);
+                    break;
+                case ConstParams.BGM:
+                    SetBGM(data[1]);
+                    break;
+                case ConstParams.SE:
+                    UseSE(data[1]);
+                    break;
+                case ConstParams.LeftCharImg:
+
+                    break;
+                case ConstParams.CenterCharImg:
+                    break;
+                case ConstParams.RightCharImg:
+                    break;
+                case ConstParams.ThumbnailImg:
+                    break;
+                case ConstParams.CharName:
+                    break;
+                case ConstParams.BGI:
+                    break;
+                case ConstParams.Flag:
+                    break;
+                case ConstParams.Error:
+                    break;
+            }
+        }
+
 
         public void SetMainText(string Text)
         {

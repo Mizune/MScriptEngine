@@ -26,14 +26,23 @@ namespace MScriptEngine.Views
         private bool TextFlag;
         private bool EventChecker;
         private int testCount;
+
+        // View変数
+        private TextBlock MainTextBlock;
         private MediaElement BGMContext;
+
+        // シナリオ解析＆制御変数
         private Reader reader;
         private Parser parser;
         private ViewController Controller;
         //private ScinarioViewModels Context;
-        private ArrayList Scinarios;
 
-        private TextBlock MainTextBlock;
+
+        private ArrayList Scinarios; // 読み込んだシナリオファイルのデータ群
+        private ArrayList CtlDatas;
+        private int LineCount; // Line番号のカウント
+
+
 
         public MainWindow()
         {
@@ -47,6 +56,7 @@ namespace MScriptEngine.Views
             TextFlag = false;
             EventChecker = false;
             testCount = 0;
+            LineCount = 0;
         }
 
         private void Connect()
@@ -63,7 +73,11 @@ namespace MScriptEngine.Views
 
         private void LoadScinarios(string FilePath)
         {
-            this.Scinarios = reader.Load(FilePath); 
+            this.Scinarios = reader.Load(FilePath);
+            parser = new Parser(reader.GetList(), this);
+            parser.Parsing();
+            Scinarios = parser.GetData();
+            CtlDatas = parser.GetControllData();
         }
 
         private void WindowChrome_AccessKeyPressed(object sender, AccessKeyPressedEventArgs e)
@@ -100,6 +114,9 @@ namespace MScriptEngine.Views
                 {
                     // TextかSwitch文が車でひたすらパースし続ける
                     //判定した結果でFlagを操作
+                    if((int)CtlDatas[LineCount] == 1 || (int)CtlDatas[LineCount] == 2)
+
+                    LineCount++;    
                 }
 
 

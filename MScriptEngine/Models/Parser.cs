@@ -12,7 +12,8 @@ namespace MScriptEngine.Models
     {
         int DataLength;
         ArrayList Datas;
-        ViewController Controller;
+
+        ArrayList CtlDatas; // intのみ格納 Datasに対応する
 
 
         public Parser(ArrayList Data ,MainWindow Context)
@@ -24,7 +25,7 @@ namespace MScriptEngine.Models
         {
             Datas = rawData;
             DataLength = Datas.Count;
-            Controller = new ViewController(Context);
+            CtlDatas = new ArrayList();
         }
 
         public int Parsing() // これをXAML側で呼び出すように書き換え Clickableに変更 (switchの分岐はちょっと考える) 　Switchを見つけたら 決定を待つ　決定が返って来たらそれにしたがって読み込む
@@ -35,10 +36,11 @@ namespace MScriptEngine.Models
             foreach (string data in Datas)
             {
                 Console.WriteLine("Call BranchFunction");
-                if (!BranchFunction(data))
+                if (CreateControlData(data) == -1)
                 {
                     Console.WriteLine("Error. {0} is unknown function.", data);
                 }
+                CtlDatas.Add(CreateControlData(data));
             }
 
             return 0;
@@ -46,12 +48,16 @@ namespace MScriptEngine.Models
 
         }
 
-        public bool BranchFunction(string data)
+        public ArrayList GetData() { return Datas; }
+
+        public ArrayList GetControllData() { return CtlDatas; }
+
+        public int CreateControlData(string data)
         {
             if (!data.Contains("[") && !data.Contains("]"))
             {
                 Console.WriteLine("通常文章なのでTextRenderer呼び出し");
-                Controller.ChangeText(data);
+                return 1; // 1 > TextRederer
             }
             else
             {
@@ -64,45 +70,36 @@ namespace MScriptEngine.Models
                 if (DataSize < 1)
                 {
                     Console.WriteLine("Error. 引数が足りません。");
-                    return false; // Error. 
+                    return -1; // Error. 
                 }
 
                 switch (Datas[0])
                 {
                     case "CangeBGI":
-                        Controller.SetBGM(Datas[1]);
-                        break;
+                        return ConstParams.BGI; 
                     case "UseSE":
-                        Controller.UseSE(Datas[1]);
-                        break;
+                        return ConstParams.SE;  
                     case "ChangeCenterCharImg":
-                        Controller.ChangeCenterCharImg(Datas[1]);
-                        break;
+                        return ConstParams.CenterCharImg; 
                     case "ChangeRightCharImg":
-                        Controller.ChangeRightCharImg(Datas[1]);
-                        break;
+                        return ConstParams.RightCharImg; 
                     case "ChangeLeftCharImg":
-                        Controller.ChangeLeftCharImg(Datas[1]);
-                        break;
+                        return ConstParams.LeftCharImg; 
                     case "ChangeCharName":
-                        Controller.ChangeCharName(Datas[1]);
-                        break;
+                        return ConstParams.CharName; 
                     case "ChangeThumbnailCharImg":
-                        Controller.ChangeCharThumbnail(Datas[1]);
-                        break;
+                        return ConstParams.ThumbnailImg;
                     case "Switch": // [Switch {SelectNum} {SelectText} {SelectText} ...] // [Case{Num} ] hogehoge [CaseEnd{num}]
-                        Controller.CreateSwitch(int.Parse(Datas[1]),Datas);
-                        //
-                        break;
+                        return ConstParams.Switch; 
                     case "InitFlag":
                         // controller.InitFlag,
-                        // 
-                        break;
+                        //
+                        return ConstParams.Flag; 
                 }
 
             }
             // キー入力待をここに
-            return true;
+            return 0;
         }
     }
 }
