@@ -27,9 +27,7 @@ namespace MScriptEngine.Views
         private bool EventChecker;
         private int testCount;
 
-        // View変数
-        private TextBlock MainTextBlock;
-        private MediaElement BGMContext;
+        // View変数                       
 
         // シナリオ解析＆制御変数
         private Reader reader;
@@ -48,8 +46,6 @@ namespace MScriptEngine.Views
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) => this.DragMove();
-            LoadScinarios();
-            Connect();
             reader = new Reader();
             parser = new Parser(reader.GetList(),this);
             SWFlag = false;
@@ -57,18 +53,12 @@ namespace MScriptEngine.Views
             EventChecker = false;
             testCount = 0;
             LineCount = 0;
-        }
-
-        private void Connect()
-        {
-            MainTextBlock = this.MainText;
-            BGMContext = this.BGM;
-
+            LoadScinarios();
         }
 
         private void LoadScinarios()
         {
-            LoadScinarios("FirstScinarios.txt");
+            LoadScinarios(ConstParams.ScenarioPathRoot + "FirstScenario.txt");
         }
 
         private void LoadScinarios(string FilePath)
@@ -78,30 +68,9 @@ namespace MScriptEngine.Views
             parser.Parsing();
             Scinarios = parser.GetData();
             CtlDatas = parser.GetControllData();
+            //"/Assets/Scenarios/FirstScenario.txt"
         }
 
-        private void WindowChrome_AccessKeyPressed(object sender, AccessKeyPressedEventArgs e)
-        {
-
-        }
-
-        private void Minimize(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void FullScreen(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void ReverseSize(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Exit(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Bg_ButtonClick(object sender, RoutedEventArgs e)
         {
@@ -110,11 +79,18 @@ namespace MScriptEngine.Views
                 Console.WriteLine("Clicked. : {0}", testCount);
                 testCount += 1;
 
-                while (!SWFlag & !TextFlag)
+                while (!SWFlag && !TextFlag)
                 {
                     // TextかSwitch文が車でひたすらパースし続ける
                     //判定した結果でFlagを操作
-                    if((int)CtlDatas[LineCount] == 1 || (int)CtlDatas[LineCount] == 2)
+                    Controller.Brancher((int)CtlDatas[LineCount],Scinarios[LineCount].ToString());
+                    if((int)CtlDatas[LineCount] > 3)
+                    {
+                         
+                    } else {
+
+                        TextFlag = true;
+                    }
 
                     LineCount++;    
                 }
@@ -129,7 +105,7 @@ namespace MScriptEngine.Views
             EventChecker = true;
             Console.WriteLine("MainText Clicked : {0}", testCount);
             testCount += 1;
-            BGMContext.Source = new Uri(ConstParams.SoundsPathRoot);
+            this.BGM.Source = new Uri(ConstParams.SoundsPathRoot);
         }
 
 
@@ -137,9 +113,52 @@ namespace MScriptEngine.Views
 
         public void ChangeMainText(string Text)
         {
-            MainTextBlock.Text = Text;
+            this.MainText.Text = Text;
         }
-       
-        
+
+        public void ChangeCharName(string Text)
+        {
+            this.CharName.Text = Text;    
+        }
+
+        public void ChangeCenterChar(string ImgPath)
+        {
+            Console.WriteLine(ConstParams.SoundsPathRoot + ImgPath);
+            this.CharCenterImg.Source = new BitmapImage(new Uri(ConstParams.SoundsPathRoot + ImgPath));
+        }
+
+        public void ChangeRightChar(string ImgPath)
+        {
+            this.CharRightImg.Source = new BitmapImage(new Uri(ConstParams.SoundsPathRoot + ImgPath));
+        }
+
+        public void ChangeLeftChar(string ImgPath)
+        {
+            this.CharLeftImg.Source = new BitmapImage(new Uri(ConstParams.SoundsPathRoot + ImgPath));
+        }
+
+        private void SaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LoadBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConfigBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        //BGM再生
+        //別チャンネルでSEの再生
+        //BGIの変更
+        //場面転換を入れるか入れないか
+        //Save & Loadの仕組みを作る
+
+
     }
 }

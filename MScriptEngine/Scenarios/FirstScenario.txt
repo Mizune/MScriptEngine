@@ -1,0 +1,31 @@
+﻿NormalText
+hogehoge
+fugagfuga
+[ChangeBGI hoge.mp3]
+ChangeBGI
+[UseSE fuga.mp3]
+UseSE
+[ChangeCenterCharImg char1.png]
+ChangeCenterCharImg
+[ChangeRightCharImg char1.png]
+ChangeRightCharImg
+[ChangeLeftCharImg char1.png]
+ChangeLeftCharImg
+[ChangeCharName charname]
+ChangeCharName
+[ChangeThumbnailCharImg charthumb.png]
+ChangeThumbnail
+[Switch どうする? 2 hoge fuga]
+[Case1]
+Case1
+[Case1End]
+[Case2]
+Case2
+[Case2End]
+[SwitchEnd]
+
+
+
+
+
+

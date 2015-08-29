@@ -75,7 +75,7 @@ namespace MScriptEngine.Models
 
                 switch (Datas[0])
                 {
-                    case "CangeBGI":
+                    case "ChangeBGI":
                         return ConstParams.BGI; 
                     case "UseSE":
                         return ConstParams.SE;  
@@ -91,7 +91,9 @@ namespace MScriptEngine.Models
                         return ConstParams.ThumbnailImg;
                     case "Switch": // [Switch {SelectNum} {SelectText} {SelectText} ...] // [Case{Num} ] hogehoge [CaseEnd{num}]
                         return ConstParams.Switch; 
-                    case "InitFlag":
+                    case "AddFlag":
+                    case "AjustFlag":
+                    case "ClearFlag":
                         // controller.InitFlag,
                         //
                         return ConstParams.Flag; 

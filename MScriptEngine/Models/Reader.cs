@@ -28,7 +28,7 @@ namespace MScriptEngine.Models
 
         public ArrayList Load()
         {
-            Load("first.txt");
+            Load(ConstParams.ScenarioPathRoot + "FirstScenario.txt");
             return Datas;
         }
 

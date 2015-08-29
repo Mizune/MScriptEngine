@@ -8,9 +8,10 @@ namespace MScriptEngine.Models
 {
     public class ConstParams
     {
-        public const string SoundsPathRoot = "/Sounds/";
-        public const string BGIPathRoot = "/Images/BGI/";
-        public const string CharPathRoot = "/Images/Characters/";
+        public const string SoundsPathRoot = "ms-appx:///Assets/Sounds/";
+        public const string BGIPathRoot = "ms-appx:///Assets/Images/BGI/";
+        public const string CharPathRoot = "ms-appx:///Assets/Images/Characters/";
+        public const string ScenarioPathRoot = "ms-appx:///Assets/Scenarios/";
 
 
         public const int Error = -200;

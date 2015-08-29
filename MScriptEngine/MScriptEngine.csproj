@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Images\Thumbnails\" />
-    <Folder Include="Assets\Sounds\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +111,10 @@
     <Resource Include="Assets\Images\Characters\thumbnails.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Scinarios\FirstScinario.txt" />
+    <Resource Include="Scenarios\FirstScenario.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Sounds\文発　クロスフェード.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

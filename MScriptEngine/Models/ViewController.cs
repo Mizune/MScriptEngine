@@ -1,20 +1,24 @@
 ﻿using MScriptEngine.Views;
 using System.Collections;
 using MScriptEngine.Models;
+using System.Collections.Generic;
 
 namespace MScriptEngine.Models
 {
     public class ViewController
     {
         public MainWindow Context;
+        public Dictionary<string, int> Flags = new Dictionary<string, int>();
+         
         public ViewController(MainWindow BaseContext)
         {
             this.Context = BaseContext;
         }
 
 
-        public void Brancher(int param,string[] data)
+        public void Brancher(int param,string res)// res -> [ChangeBGI hogehoge]
         {
+            string[] data = res.Split(' ');
             switch (param)
             {
                 case ConstParams.Text:
@@ -30,19 +34,37 @@ namespace MScriptEngine.Models
                     UseSE(data[1]);
                     break;
                 case ConstParams.LeftCharImg:
-
+                    ChangeLeftCharImg(data[1]);
                     break;
                 case ConstParams.CenterCharImg:
+                    ChangeCenterCharImg(data[1]);
                     break;
                 case ConstParams.RightCharImg:
+                    ChangeRightCharImg(data[1]);
                     break;
                 case ConstParams.ThumbnailImg:
+                    ChangeCharThumbnail(data[1]);
                     break;
                 case ConstParams.CharName:
+                    ChangeCharName(data[1]);
                     break;
                 case ConstParams.BGI:
+                    ChangeBGI(data[1]);
                     break;
                 case ConstParams.Flag:
+                    switch (data[0])
+                    {
+                        case "AddFlag":
+                            Flags.Add(data[1],0);
+                            break;
+                        case "AjustFlag":
+                            Flags[data[1]] += int.Parse(data[2]); // 入力値検証なし
+                            break;
+                        case "ClearFlag":
+                            Flags[data[1]] = 0;
+                            break;
+                    }
+                    // Addとedit,clear,get
                     break;
                 case ConstParams.Error:
                     break;
@@ -65,8 +87,10 @@ namespace MScriptEngine.Models
 
         }
 
-        public void CreateSwitch(int selectCount, string[] data)
+        public void CreateSwitch(int selectCount, string[] data) // [Switch {num} {select}...]
         {
+            ArrayList select = new ArrayList(data);
+            select.RemoveRange(0, 2);
 
         }
 
@@ -90,6 +114,11 @@ namespace MScriptEngine.Models
         }
 
         public void UseSE(string SEPath)
+        {
+
+        }
+
+        public void ChangeBGI(string BGIPath)
         {
 
         }
