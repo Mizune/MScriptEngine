@@ -54,6 +54,7 @@ namespace MScriptEngine.Views
             testCount = 0;
             LineCount = 0;
             LoadScinarios();
+            this.Title = "Platinum Toybox";
         }
 
         private void LoadScinarios()

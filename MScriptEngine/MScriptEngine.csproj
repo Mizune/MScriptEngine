@@ -63,8 +63,20 @@
     <Compile Include="Models\Parser.cs" />
     <Compile Include="Models\Reader.cs" />
     <Compile Include="Models\ViewController.cs" />
+    <Compile Include="Views\Load.xaml.cs">
+      <DependentUpon>Load.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Config.xaml.cs">
+      <DependentUpon>Config.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Save.xaml.cs">
+      <DependentUpon>Save.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Title.xaml.cs">
+      <DependentUpon>Title.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +111,23 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Load.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Config.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Save.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Title.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
