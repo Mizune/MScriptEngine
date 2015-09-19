@@ -37,11 +37,14 @@ namespace MScriptEngine.Models
             Line = "";
             Datas = new ArrayList();
 
-            using (SReader = new StreamReader(filePath, Encoding.GetEncoding("UTF-8")))
+            Console.WriteLine("Load file path : " + ConstParams.ROOT + filePath);
+
+            using (SReader = new StreamReader(ConstParams.ROOT + filePath, Encoding.GetEncoding("UTF-8")))
             {
                 while ((Line = SReader.ReadLine()) != null)
                 {
                     Datas.Add(Line);
+                    Console.WriteLine(Line);
                 }
             }
             return Datas;

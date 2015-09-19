@@ -35,7 +35,7 @@ namespace MScriptEngine.Models
                 return -1;
             foreach (string data in Datas)
             {
-                Console.WriteLine("Call BranchFunction");
+                // Console.WriteLine("Call BranchFunction");
                 if (CreateControlData(data) == -1)
                 {
                     Console.WriteLine("Error. {0} is unknown function.", data);
@@ -86,6 +86,7 @@ namespace MScriptEngine.Models
                     case "ChangeLeftCharImg":
                         return ConstParams.LeftCharImg; 
                     case "ChangeCharName":
+                        Console.WriteLine("Change Char Name in CreateControlData");
                         return ConstParams.CharName; 
                     case "ChangeThumbnailCharImg":
                         return ConstParams.ThumbnailImg;
@@ -96,7 +97,9 @@ namespace MScriptEngine.Models
                     case "ClearFlag":
                         // controller.InitFlag,
                         //
-                        return ConstParams.Flag; 
+                        return ConstParams.Flag;
+                    case "Config":
+                        return ConstParams.Config; 
                 }
 
             }

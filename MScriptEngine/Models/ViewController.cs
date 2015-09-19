@@ -2,6 +2,7 @@
 using System.Collections;
 using MScriptEngine.Models;
 using System.Collections.Generic;
+using System;
 
 namespace MScriptEngine.Models
 {
@@ -18,14 +19,16 @@ namespace MScriptEngine.Models
 
         public void Brancher(int param,string res)// res -> [ChangeBGI hogehoge]
         {
+
             string[] data = res.Split(' ');
+            Console.WriteLine(res);
             switch (param)
             {
                 case ConstParams.Text:
-                    SetMainText(data[1]);
+                    SetMainText(data[0]);
                     break;
                 case ConstParams.Switch:
-                    CreateSwitch(int.Parse(data[1]),data);
+                    CreateSwitch(data);
                     break;
                 case ConstParams.BGM:
                     SetBGM(data[1]);
@@ -47,6 +50,7 @@ namespace MScriptEngine.Models
                     break;
                 case ConstParams.CharName:
                     ChangeCharName(data[1]);
+                    Console.WriteLine("Called ChangeCharName in Brancher");
                     break;
                 case ConstParams.BGI:
                     ChangeBGI(data[1]);
@@ -66,6 +70,8 @@ namespace MScriptEngine.Models
                     }
                     // Addとedit,clear,get
                     break;
+                case ConstParams.Config:
+                    break;
                 case ConstParams.Error:
                     break;
             }
@@ -79,18 +85,19 @@ namespace MScriptEngine.Models
 
         public void ChangeCharName(string Name)
         {
-
+            Console.WriteLine("called change charname in controller");
+            Context.ChangeCharName(Name);
         }
 
         public void ChangeCharThumbnail(string ImgPath)
         {
-
+            // Context. MainWindowにない
         }
 
-        public void CreateSwitch(int selectCount, string[] data) // [Switch {num} {select}...]
+        public void CreateSwitch(string[] data) // [Switch {num} {select}...]
         {
             ArrayList select = new ArrayList(data);
-            select.RemoveRange(0, 2);
+            select.RemoveRange(0, int.Parse(data[1]));
 
         }
 

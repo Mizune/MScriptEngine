@@ -60,6 +60,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\ConstParams.cs" />
+    <Compile Include="Models\CurrentState.cs" />
     <Compile Include="Models\Parser.cs" />
     <Compile Include="Models\Reader.cs" />
     <Compile Include="Models\ViewController.cs" />
@@ -139,7 +140,7 @@
     <Resource Include="Assets\Images\Characters\thumbnails.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Scenarios\FirstScenario.txt" />
+    <Resource Include="Assets\Scenarios\FirstScenario.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Sounds\文発　クロスフェード.wav" />

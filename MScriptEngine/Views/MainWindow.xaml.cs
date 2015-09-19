@@ -20,6 +20,7 @@ namespace MScriptEngine.Views
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
+    /// TODO サンプルスクリプトの場所を探す
     public partial class MainWindow : Window
     {
         private bool SWFlag;
@@ -48,12 +49,13 @@ namespace MScriptEngine.Views
             this.MouseLeftButtonDown += (sender, e) => this.DragMove();
             reader = new Reader();
             parser = new Parser(reader.GetList(),this);
+            Controller = new ViewController(this);
             SWFlag = false;
             TextFlag = false;
             EventChecker = false;
             testCount = 0;
             LineCount = 0;
-            LoadScinarios();
+            LoadScinarios();// if シナリオがあるか　セーブスタートか　
             this.Title = "Platinum Toybox";
         }
 
@@ -74,39 +76,34 @@ namespace MScriptEngine.Views
 
 
         private void Bg_ButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (!EventChecker)
+        { 
+            Console.WriteLine("Clicked. : {0}", testCount);
+            testCount += 1;
+
+            while (!TextFlag)
             {
-                Console.WriteLine("Clicked. : {0}", testCount);
-                testCount += 1;
-
-                while (!SWFlag && !TextFlag)
+                if (!SWFlag)
                 {
-                    // TextかSwitch文が車でひたすらパースし続ける
+                        
                     //判定した結果でFlagを操作
-                    Controller.Brancher((int)CtlDatas[LineCount],Scinarios[LineCount].ToString());
-                    if((int)CtlDatas[LineCount] > 3)
+                    // 配列がout of bounds
+                    Controller.Brancher((int)CtlDatas[LineCount], Scinarios[LineCount].ToString());
+                    if ((int)CtlDatas[LineCount]!= 1)
                     {
-                         
-                    } else {
-
+                        Console.WriteLine("TextFlag is false");
+                    }
+                    else
+                    {
+                        Console.WriteLine("TextFlag is true");
                         TextFlag = true;
                     }
 
-                    LineCount++;    
-                }
-
-
+                    LineCount++;
+                } 
             }
-            EventChecker = false;
-        }
+            TextFlag = false;
+            SWFlag = false;
 
-        private void MainTextClick(object sender,RoutedEventArgs e)
-        {
-            EventChecker = true;
-            Console.WriteLine("MainText Clicked : {0}", testCount);
-            testCount += 1;
-            this.BGM.Source = new Uri(ConstParams.SoundsPathRoot);
         }
 
 
@@ -119,6 +116,7 @@ namespace MScriptEngine.Views
 
         public void ChangeCharName(string Text)
         {
+            Console.WriteLine("called change char name");
             this.CharName.Text = Text;    
         }
 
@@ -138,6 +136,17 @@ namespace MScriptEngine.Views
             this.CharLeftImg.Source = new BitmapImage(new Uri(ConstParams.SoundsPathRoot + ImgPath));
         }
 
+        public void ChangeBGM(string BGMPath)
+        {
+            this.BGM.Source = new Uri(ConstParams.SoundsPathRoot + BGMPath);
+            // BGMを再生するところまでやらなきゃだめ
+        }
+
+        public void UseSE(string SEPath)
+        {
+
+        }
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -153,6 +162,14 @@ namespace MScriptEngine.Views
 
         }
 
+        public void CreateSwitchBtn(string[] data)
+        {
+            // data[1]を取得して
+            // その数だけボタンを生成して
+            // ボタンにidを割り振って
+            // クリッカブルイベントつくっておわり
+        }
+
 
         //BGM再生
         //別チャンネルでSEの再生
@@ -160,6 +177,12 @@ namespace MScriptEngine.Views
         //場面転換を入れるか入れないか
         //Save & Loadの仕組みを作る
 
+        public void LoadSaveData(int pathNum)
+        {
+
+        }
+
+        // 話の節目に画像を入れる処理(フェードインフェードアウト)
 
     }
 }

@@ -17,9 +17,9 @@ namespace MScriptEngine.Views
     /// <summary>
     /// Window1.xaml の相互作用ロジック
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Config : Window
     {
-        public Window1()
+        public Config()
         {
             InitializeComponent();
         }
