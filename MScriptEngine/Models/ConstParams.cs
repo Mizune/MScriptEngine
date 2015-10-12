@@ -12,6 +12,7 @@ namespace MScriptEngine.Models
         public const string BGIPathRoot = "Assets/Images/BGI/";
         public const string CharPathRoot = "Assets/Images/Characters/";
         public const string ScenarioPathRoot = "Assets/Scenarios/";
+        public const string SaveDataPathRoot = "Assets/SavaDatas/";
 
 
         public const string ROOT = "../../";

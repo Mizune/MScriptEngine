@@ -54,6 +54,7 @@ namespace MScriptEngine.Models
 
         public int CreateControlData(string data)
         {
+            Console.WriteLine("data = {0}",data);
             if (!data.Contains("[") && !data.Contains("]"))
             {
                 Console.WriteLine("通常文章なのでTextRenderer呼び出し");
@@ -61,8 +62,8 @@ namespace MScriptEngine.Models
             }
             else
             {
-                data.Replace("[", ""); // 要らないものを消去
-                data.Replace("]", "");
+                data = data.Replace("[", ""); // 要らないものを消去
+                data = data.Replace("]", "");
 
                 string[] Datas = data.Split(' '); // スペースでsplit
                 int DataSize = Datas.Length;
@@ -72,6 +73,8 @@ namespace MScriptEngine.Models
                     Console.WriteLine("Error. 引数が足りません。");
                     return -1; // Error. 
                 }
+
+                Console.WriteLine("debug : "+ Datas[0]);
 
                 switch (Datas[0])
                 {

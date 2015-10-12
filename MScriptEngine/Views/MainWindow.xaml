@@ -4,7 +4,7 @@
         Title="Plat!num Toybox" Height="720" Width="1280" SnapsToDevicePixels="True"
         Background="Black"
         ResizeMode="NoResize">
-    <Grid>
+    <Grid x:Name="Root">
         <MediaElement Name="myMediaElement" >
             <MediaElement.Triggers>
                 <EventTrigger RoutedEvent="MediaElement.Loaded">
@@ -82,7 +82,7 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    <TextBlock x:Name="MainText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,50,20,15" FontSize="30" TextWrapping="Wrap" Grid.ColumnSpan="2">ほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文ほんぶんほんぶんほんぶんほんぶん本文</TextBlock>
+                    <TextBlock x:Name="MainText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,50,20,15" FontSize="30" TextWrapping="Wrap" Grid.ColumnSpan="2"></TextBlock>
                 </Grid>
             </Grid>
         </Grid>

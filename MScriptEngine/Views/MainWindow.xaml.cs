@@ -27,6 +27,7 @@ namespace MScriptEngine.Views
         private bool TextFlag;
         private bool EventChecker;
         private int testCount;
+        private int SwitchNum;
 
         // View変数                       
 
@@ -42,8 +43,12 @@ namespace MScriptEngine.Views
         private int LineCount; // Line番号のカウント
 
 
+        // SaveData変数
+        private CurrentState State;
 
-        public MainWindow()
+
+
+        public MainWindow()// 遷移するときに値を持たせてフラグ処理でセーブ読み込み
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) => this.DragMove();
@@ -55,8 +60,16 @@ namespace MScriptEngine.Views
             EventChecker = false;
             testCount = 0;
             LineCount = 0;
-            LoadScinarios();// if シナリオがあるか　セーブスタートか　
+            LoadScinarios();// if シナリオがあるか　セーブスタートか
+
+            State = new CurrentState();
+
+            this.Root.DataContext = State;
+            　
             this.Title = "Platinum Toybox";
+            
+            
+            foreach(var d in CtlDatas){ Console.WriteLine(d); }
         }
 
         private void LoadScinarios()
@@ -84,10 +97,15 @@ namespace MScriptEngine.Views
             {
                 if (!SWFlag)
                 {
-                        
+
                     //判定した結果でFlagを操作
                     // 配列がout of bounds
-                    Controller.Brancher((int)CtlDatas[LineCount], Scinarios[LineCount].ToString());
+
+                    string script = Scinarios[LineCount].ToString();
+                    script = script.Replace("[", "");
+                    script = script.Replace("]", "");
+
+                    Controller.Brancher((int)CtlDatas[LineCount], script);
                     if ((int)CtlDatas[LineCount]!= 1)
                     {
                         Console.WriteLine("TextFlag is false");
@@ -111,11 +129,13 @@ namespace MScriptEngine.Views
 
         public void ChangeMainText(string Text)
         {
-            this.MainText.Text = Text;
+            // 一文字ずつ変えてく処理
+            this.MainText.Text = Text;  
         }
 
         public void ChangeCharName(string Text)
         {
+            // 一文字ずつ変えてく処理？
             Console.WriteLine("called change char name");
             this.CharName.Text = Text;    
         }
@@ -144,7 +164,7 @@ namespace MScriptEngine.Views
 
         public void UseSE(string SEPath)
         {
-
+            this.SE.Source = new Uri(ConstParams.SoundsPathRoot + SEPath);
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
@@ -168,6 +188,13 @@ namespace MScriptEngine.Views
             // その数だけボタンを生成して
             // ボタンにidを割り振って
             // クリッカブルイベントつくっておわり
+            int count = int.Parse(data[1]);
+
+            for(int i = 0; i < count; i++)
+            {
+                // btn 生成, それぞれのdata[i+2]をcontentに　生成するボタンにidつける クリックイベント(一括)をつける
+                // クリックイベントはidよみとって選択しをglobalに投げる > Flagをきる  ここまでやるとOK
+            }
         }
 
 
@@ -178,6 +205,11 @@ namespace MScriptEngine.Views
         //Save & Loadの仕組みを作る
 
         public void LoadSaveData(int pathNum)
+        {
+
+        }
+
+        public void CreateSaveData(int pathNum)
         {
 
         }

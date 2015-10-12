@@ -21,7 +21,10 @@ namespace MScriptEngine.Models
         {
 
             string[] data = res.Split(' ');
+            
             Console.WriteLine(res);
+            Console.WriteLine("called Brancher");
+            Console.WriteLine("param = {0}",param);
             switch (param)
             {
                 case ConstParams.Text:
@@ -96,33 +99,31 @@ namespace MScriptEngine.Models
 
         public void CreateSwitch(string[] data) // [Switch {num} {select}...]
         {
-            ArrayList select = new ArrayList(data);
-            select.RemoveRange(0, int.Parse(data[1]));
-
+            Context.CreateSwitchBtn(data);                                          
         }
 
         public void ChangeLeftCharImg(string ImgPath)
         {
-
+            Context.ChangeLeftChar(ImgPath);
         }
 
         public void ChangeCenterCharImg(string ImgPath)
         {
-
+            Context.ChangeCenterChar(ImgPath);
         }
         public void ChangeRightCharImg(string ImgPath)
         {
-
+            Context.ChangeRightChar(ImgPath);
         }
 
         public void SetBGM(string BGMPath)
         {
-
+            Context.ChangeBGM(BGMPath);
         }
 
         public void UseSE(string SEPath)
         {
-
+            //Context.ChangeSE();
         }
 
         public void ChangeBGI(string BGIPath)
